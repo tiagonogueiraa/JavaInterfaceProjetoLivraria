@@ -66,6 +66,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
         JMenuCadastros.setText("Cadastros");
+        JMenuCadastros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JMenuCadastrosActionPerformed(evt);
+            }
+        });
 
         jMenuItemCadCliente.setText("Clientes");
         JMenuCadastros.add(jMenuItemCadCliente);
@@ -143,12 +148,18 @@ public class FormPrincipal extends javax.swing.JFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        setBounds(0, 0, 839, 601);
+        pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemComprasDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemComprasDiaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItemComprasDiaActionPerformed
+
+    private void JMenuCadastrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMenuCadastrosActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_JMenuCadastrosActionPerformed
 
     /**
      * @param args the command line arguments
