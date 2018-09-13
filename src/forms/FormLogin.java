@@ -22,7 +22,7 @@ public class FormLogin extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         lbMensagem = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Processo de Login");
         setResizable(false);
 
@@ -149,7 +149,10 @@ public class FormLogin extends javax.swing.JFrame {
                 if(user.efetuarLogin(matricula, senha))
                 {
                     //mandar mensagem
-                    lbMensagem.setText("Login correto");
+                   //lbMensagem.setText("Login correto");
+                    
+                    new FormPrincipal().setVisible(true);
+                    this.dispose();
                 }
                 else
                 {

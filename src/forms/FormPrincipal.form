@@ -16,6 +16,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Clientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItemCadClienteActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemCadProdutos">
               <Properties>
@@ -27,6 +30,42 @@
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSair">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sair"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuSuporte">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Suporte"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSuporteAjuda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ajuda"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSuporteSobre">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Sobre"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenuVenda">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Venda"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVendaNovaVenda">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nova Venda"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVendaEmitirNotaFiscal">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Emitir Nota Fiscal"/>
               </Properties>
             </MenuItem>
           </SubComponents>
@@ -75,42 +114,6 @@
             </Menu>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuVenda">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Venda"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVendaNovaVenda">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Nova Venda"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemVendaEmitirNotaFiscal">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Emitir Nota Fiscal"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenuSuporte">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Suporte"/>
-          </Properties>
-          <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSuporteAjuda">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Ajuda"/>
-              </Properties>
-            </MenuItem>
-            <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator2">
-            </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItemSuporteSobre">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Sobre"/>
-              </Properties>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>
@@ -141,12 +144,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="837" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="1" pref="586" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>

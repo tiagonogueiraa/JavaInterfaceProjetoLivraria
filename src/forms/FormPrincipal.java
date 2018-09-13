@@ -37,6 +37,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItemCadProdutos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemSair = new javax.swing.JMenuItem();
+        jMenuSuporte = new javax.swing.JMenu();
+        jMenuItemSuporteAjuda = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemSuporteSobre = new javax.swing.JMenuItem();
+        jMenuVenda = new javax.swing.JMenu();
+        jMenuItemVendaNovaVenda = new javax.swing.JMenuItem();
+        jMenuItemVendaEmitirNotaFiscal = new javax.swing.JMenuItem();
         JMenuConsultas = new javax.swing.JMenu();
         jMenuItemConsuClientes = new javax.swing.JMenuItem();
         jMenuItemConsuProdutos = new javax.swing.JMenuItem();
@@ -44,13 +51,6 @@ public class FormPrincipal extends javax.swing.JFrame {
         jMenuItemComprasDia = new javax.swing.JMenuItem();
         jMenuItemComprasMes = new javax.swing.JMenuItem();
         jMenuItemComprasAno = new javax.swing.JMenuItem();
-        jMenuVenda = new javax.swing.JMenu();
-        jMenuItemVendaNovaVenda = new javax.swing.JMenuItem();
-        jMenuItemVendaEmitirNotaFiscal = new javax.swing.JMenuItem();
-        jMenuSuporte = new javax.swing.JMenu();
-        jMenuItemSuporteAjuda = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        jMenuItemSuporteSobre = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema eletrônico de livraria");
@@ -73,6 +73,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         jMenuItemCadCliente.setText("Clientes");
+        jMenuItemCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadClienteActionPerformed(evt);
+            }
+        });
         JMenuCadastros.add(jMenuItemCadCliente);
 
         jMenuItemCadProdutos.setText("Produto");
@@ -83,6 +88,27 @@ public class FormPrincipal extends javax.swing.JFrame {
         JMenuCadastros.add(jMenuItemSair);
 
         jMenuBar1.add(JMenuCadastros);
+
+        jMenuSuporte.setText("Suporte");
+
+        jMenuItemSuporteAjuda.setText("Ajuda");
+        jMenuSuporte.add(jMenuItemSuporteAjuda);
+        jMenuSuporte.add(jSeparator2);
+
+        jMenuItemSuporteSobre.setText("Sobre");
+        jMenuSuporte.add(jMenuItemSuporteSobre);
+
+        jMenuBar1.add(jMenuSuporte);
+
+        jMenuVenda.setText("Venda");
+
+        jMenuItemVendaNovaVenda.setText("Nova Venda");
+        jMenuVenda.add(jMenuItemVendaNovaVenda);
+
+        jMenuItemVendaEmitirNotaFiscal.setText("Emitir Nota Fiscal");
+        jMenuVenda.add(jMenuItemVendaEmitirNotaFiscal);
+
+        jMenuBar1.add(jMenuVenda);
 
         JMenuConsultas.setText("Consultas");
         JMenuConsultas.setToolTipText("");
@@ -114,38 +140,17 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(JMenuConsultas);
 
-        jMenuVenda.setText("Venda");
-
-        jMenuItemVendaNovaVenda.setText("Nova Venda");
-        jMenuVenda.add(jMenuItemVendaNovaVenda);
-
-        jMenuItemVendaEmitirNotaFiscal.setText("Emitir Nota Fiscal");
-        jMenuVenda.add(jMenuItemVendaEmitirNotaFiscal);
-
-        jMenuBar1.add(jMenuVenda);
-
-        jMenuSuporte.setText("Suporte");
-
-        jMenuItemSuporteAjuda.setText("Ajuda");
-        jMenuSuporte.add(jMenuItemSuporteAjuda);
-        jMenuSuporte.add(jSeparator2);
-
-        jMenuItemSuporteSobre.setText("Sobre");
-        jMenuSuporte.add(jMenuItemSuporteSobre);
-
-        jMenuBar1.add(jMenuSuporte);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 837, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,6 +165,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_JMenuCadastrosActionPerformed
+
+    private void jMenuItemCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadClienteActionPerformed
+        // TODO add your handling code here:
+        
+        new FormCliente().setVisible(true);
+        
+        this.dispose();
+    }//GEN-LAST:event_jMenuItemCadClienteActionPerformed
 
     /**
      * @param args the command line arguments
