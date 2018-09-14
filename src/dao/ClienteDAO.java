@@ -14,34 +14,53 @@ import java.util.ArrayList;
  * @author alunoces
  */
 public class ClienteDAO {
-    
+
     //como não tem banco, vai criar um atributo lista
     private List<Cliente> lista = null;
-    
+
     public ClienteDAO() {
-        
-            //só instanciar se criar objeto cliente
-            new ArrayList<Cliente>();
+
+        //só instanciar se criar objeto cliente
+        new ArrayList<Cliente>();
     }
 
     public void adicionarCliente(Cliente cliente) {
-        
+
         lista.add(cliente);
-                
+
     }
-    
-    public void removerCliente(String cpf){
-        
+
+    public void removerCliente(String cpf) {
+
+        Cliente cli = this.buscarCliente(cpf);
+        if (cli != null) {
+
+            lista.remove(cli);
+        }
     }
-    
-    public void alterarCliente(Cliente cliente){
-        
-        
+
+    public void alterarCliente(Cliente cliente) {
+
+        Cliente cli = buscarCliente(cliente.getCpf());
+        int ind = lista.indexOf(cli);
+        lista.set(ind, cliente);
     }
-    
-    public Cliente buscarCliente(String cpf){
-        
-        return null;
+
+    public Cliente buscarCliente(String cpf) {
+
+        Cliente cli = null;
+        for (Cliente cliente : lista) {
+            if (cliente.getCpf() == cpf) {
+                cli = cliente;
+
+            }
+        }
+
+        return cli;
+    }
+
+    public List<Cliente> todosClientes() {
+        return lista;
     }
 
 }

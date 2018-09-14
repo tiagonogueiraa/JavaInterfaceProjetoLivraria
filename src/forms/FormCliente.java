@@ -5,6 +5,9 @@
  */
 package forms;
 
+import classes.Cliente;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunoces
@@ -27,7 +30,7 @@ public class FormCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        abas = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -41,13 +44,13 @@ public class FormCliente extends javax.swing.JFrame {
         jRadioButton5 = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfNome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btLimpar = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -146,7 +149,7 @@ public class FormCliente extends javax.swing.JFrame {
                 .addGap(35, 35, 35))
         );
 
-        jTabbedPane1.addTab("Dados Pessoais", jPanel1);
+        abas.addTab("Dados Pessoais", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -159,23 +162,33 @@ public class FormCliente extends javax.swing.JFrame {
             .addGap(0, 259, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Endereço Completo", jPanel2);
+        abas.addTab("Endereço Completo", jPanel2);
 
         jLabel1.setText("CPF:");
 
-        jTextField1.setText("jTextField1");
+        tfCpf.setText("jTextField1");
 
         jLabel2.setText("Nome Completo:");
 
-        jTextField2.setText("jTextField2");
+        tfNome.setText("jTextField2");
 
         jButton1.setText("Buscar");
 
         jButton2.setText("Cadastrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Atualizar");
 
-        jButton4.setText("Limpar");
+        btLimpar.setText("Limpar");
+        btLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLimparActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Sair");
 
@@ -183,7 +196,7 @@ public class FormCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(abas, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,9 +206,9 @@ public class FormCliente extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(29, 29, 29))))
@@ -205,7 +218,7 @@ public class FormCliente extends javax.swing.JFrame {
                 .addGap(48, 48, 48)
                 .addComponent(jButton3)
                 .addGap(76, 76, 76)
-                .addComponent(jButton4)
+                .addComponent(btLimpar)
                 .addGap(71, 71, 71)
                 .addComponent(jButton5)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -219,21 +232,21 @@ public class FormCliente extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
+                    .addComponent(btLimpar)
                     .addComponent(jButton5))
                 .addGap(20, 20, 20))
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("");
+        abas.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -246,6 +259,48 @@ public class FormCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton2ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        //pegar os dados da tela e inserindo no objeto
+        
+        Cliente cliente = new Cliente();
+        //criar o objeto e preenche-lo
+        cliente.setCpf(tfCpf.getText());
+        cliente.setNome(tfNome.getText());
+        cliente.setEstadoCivil();
+        cliente.setTelefonet(tfTelefone.getText());
+        cliente.setEmail(tfEmail.getText());
+        
+        
+        
+        //salvar na base de dados
+        FormPrincipal.daoCliente.adicionarCliente(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso","Cadastro de Cliente" , JOptionPane.INFORMATION_MESSAGE);
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_btLimparActionPerformed
+    
+    private void limpar()
+            
+    {
+        tfNome.setText("");
+        tfCpf.setText("");
+        
+        
+        //voltar para a primeira aba
+        abas.setSelectedIndex(0); // chama a aba que é um componente pelo index 
+        bgEstado.clearSelection();//botao group
+        cbEstado.setSelectedIndex(-1);// combo box
+        tfCpf.requestFocus();// manda foco para o cpf
+    }
     /**
      * @param args the command line arguments
      */
@@ -283,10 +338,11 @@ public class FormCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane abas;
+    private javax.swing.JButton btLimpar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -300,10 +356,9 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField tfCpf;
+    private javax.swing.JTextField tfNome;
     // End of variables declaration//GEN-END:variables
 }
