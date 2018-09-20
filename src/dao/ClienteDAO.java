@@ -21,7 +21,7 @@ public class ClienteDAO {
     public ClienteDAO() {
 
         //só instanciar se criar objeto cliente
-        new ArrayList<Cliente>();
+       lista = new ArrayList<Cliente>();
     }
 
     public void adicionarCliente(Cliente cliente) {
