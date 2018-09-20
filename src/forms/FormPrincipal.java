@@ -178,7 +178,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         
         new FormCliente().setVisible(true);
         
-        this.dispose();
+       // this.dispose(); estava fechando o form principal
     }//GEN-LAST:event_jMenuItemCadClienteActionPerformed
 
     /**
