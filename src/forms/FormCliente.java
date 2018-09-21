@@ -52,13 +52,13 @@ public class FormCliente extends javax.swing.JFrame {
         tfLogradouro = new javax.swing.JTextField();
         tfComplemento = new javax.swing.JTextField();
         tfCidade = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        cbEstado = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfCpf = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btBuscar = new javax.swing.JButton();
         btCadastrar = new javax.swing.JButton();
         btAtualizar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
@@ -191,6 +191,13 @@ public class FormCliente extends javax.swing.JFrame {
             }
         });
 
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MG", "SP", "RJ", "ES" }));
+        cbEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -208,8 +215,8 @@ public class FormCliente extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
@@ -236,8 +243,8 @@ public class FormCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
 
@@ -247,7 +254,12 @@ public class FormCliente extends javax.swing.JFrame {
 
         jLabel2.setText("Nome Completo:");
 
-        jButton1.setText("Buscar");
+        btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
 
         btCadastrar.setText("Cadastrar");
         btCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -290,7 +302,7 @@ public class FormCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btBuscar)
                         .addGap(29, 29, 29))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
@@ -314,7 +326,7 @@ public class FormCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
                 .addComponent(abas, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -342,7 +354,7 @@ public class FormCliente extends javax.swing.JFrame {
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
         //pegar os dados da tela e inserindo no objeto
-        
+
         Cliente cliente = new Cliente();
         //criar o objeto e preenche-lo
         cliente.setCpf(tfCpf.getText());
@@ -350,22 +362,18 @@ public class FormCliente extends javax.swing.JFrame {
         cliente.setEstadoCivil(bgEstadoCivil.getSelection().getActionCommand());
         cliente.setTelefone(tfTelefone.getText());
         cliente.setEmail(tfEmail.getText());
-        
-        
-        
+
         //salvar na base de dados
         FormPrincipal.daoCliente.adicionarCliente(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso","Cadastro de Cliente" , JOptionPane.INFORMATION_MESSAGE);
-        
-        
-        
-        
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso", "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
+
+
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         // TODO add your handling code here:
         limpar();
-        
+
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void tfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneActionPerformed
@@ -382,13 +390,39 @@ public class FormCliente extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();
     }//GEN-LAST:event_btSairActionPerformed
-    
-    private void limpar()
+
+    private void cbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbEstadoActionPerformed
+
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        // TODO add your handling code here:
+
+        String cpf = tfCpf.getText();
+        Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
+        if (cliente != null)
             
-    {
+        {
+            tfNome.setText(cliente.getNome());
+            tfTelefone.setText(cliente.getTelefone());
+            tfEmail.setText(cliente.getEmail());
+            
+            tfLogradouro.setText(cliente.getEndereco().getLogradouro());
+        }
+        
+        
+        //setar o cep no combobox
+        
+        for(int i = 0; i < cbEstado.getItemCount(); i++)
+        {
+            if (cbEstado.getItemAt(i).equals(cliente.getEstado()))
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void limpar() {
         tfNome.setText("");
         tfCpf.setText("");
         tfCidade.setText("");
@@ -396,15 +430,14 @@ public class FormCliente extends javax.swing.JFrame {
         tfEmail.setText("");
         tfLogradouro.setText("");
         tfTelefone.setText("");
-        
-        
-        
+
         //voltar para a primeira aba
         abas.setSelectedIndex(0); // chama a aba que é um componente pelo index 
         bgEstadoCivil.clearSelection();//botao group
-       // bgEstadoCivil.setSelectedIndex(-1);// combo box
+        // bgEstadoCivil.setSelectedIndex(-1);// combo box
         tfCpf.requestFocus();// manda foco para o cpf
     }
+
     /**
      * @param args the command line arguments
      */
@@ -445,10 +478,11 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JTabbedPane abas;
     private javax.swing.ButtonGroup bgEstadoCivil;
     private javax.swing.JButton btAtualizar;
+    private javax.swing.JButton btBuscar;
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btSair;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -466,7 +500,6 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField tfCidade;
     private javax.swing.JTextField tfComplemento;
