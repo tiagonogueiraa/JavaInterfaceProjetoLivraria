@@ -16,19 +16,37 @@ public class Cliente {
     private String estadoCivil;
     private String telefone;
     private String email;
+    public Endereco endereco;
 
     public Cliente() {
+        endereco = new Endereco();
     }
 
-    public Cliente(String cpf, String nome, String estadoCivil, String telefone, String email) {
+    public Cliente(String cpf, String nome, String estadoCivil, String telefone, String email, Endereco endereco) {
         this.cpf = cpf;
         this.nome = nome;
         this.estadoCivil = estadoCivil;
         this.telefone = telefone;
         this.email = email;
+        this.endereco = endereco;
     }
 
-    
+    @Override
+    public String toString(){
+        String str = "CPF: " + cpf;
+        str += "\nNome: " + nome;
+        str += "\nEmail: " + email;
+        str += "\nTelefone: " + telefone;
+        str += "\nEstado Civil: " + estadoCivil;
+        str += "\n---------ENDEREÇO-----------";
+        str += "\nLogradouro: " + endereco.getLogradouro();
+        str += "\nCidade: " + endereco.getCidade();
+        str += "\nEstado: " + endereco.getEstado();
+        str += "\nCEP: " + endereco.getCep();
+        
+        return str;
+        
+    }
     
     public String getCpf() {
         return cpf;

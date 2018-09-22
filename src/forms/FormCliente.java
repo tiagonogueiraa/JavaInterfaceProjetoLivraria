@@ -52,7 +52,7 @@ public class FormCliente extends javax.swing.JFrame {
         tfLogradouro = new javax.swing.JTextField();
         tfComplemento = new javax.swing.JTextField();
         tfCidade = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tfCep = new javax.swing.JTextField();
         cbEstado = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         tfCpf = new javax.swing.JTextField();
@@ -221,7 +221,7 @@ public class FormCliente extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel9)
                     .addComponent(tfComplemento)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                    .addComponent(tfCep, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
                 .addGap(49, 49, 49))
         );
         jPanel2Layout.setVerticalGroup(
@@ -243,7 +243,7 @@ public class FormCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(118, Short.MAX_VALUE))
         );
@@ -362,18 +362,25 @@ public class FormCliente extends javax.swing.JFrame {
         cliente.setEstadoCivil(bgEstadoCivil.getSelection().getActionCommand());
         cliente.setTelefone(tfTelefone.getText());
         cliente.setEmail(tfEmail.getText());
+        //String logradouro, String complemento, String cidade, String estado, String cep
+        cliente.endereco.setLogradouro(tfLogradouro.getText());
+        //auto.setMotor(cbMotor.getSelectedItem().toString());
+        cliente.endereco.setEstado(cbEstado.getSelectedItem().toString());
+        cliente.endereco.setComplemento(tfComplemento.getText());
+        cliente.endereco.setCidade(tfCidade.getText());
+        cliente.endereco.setCep(tfCep.getText());
+        
 
         //salvar na base de dados
         FormPrincipal.daoCliente.adicionarCliente(cliente);
         JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso", "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
-
+        limpar();
 
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
         // TODO add your handling code here:
         limpar();
-
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void tfTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfTelefoneActionPerformed
@@ -390,7 +397,6 @@ public class FormCliente extends javax.swing.JFrame {
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         // TODO add your handling code here:
-
         this.dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
@@ -403,22 +409,21 @@ public class FormCliente extends javax.swing.JFrame {
 
         String cpf = tfCpf.getText();
         Cliente cliente = FormPrincipal.daoCliente.buscarCliente(cpf);
-        if (cliente != null)
-            
-        {
+        if (cliente != null) {
             tfNome.setText(cliente.getNome());
             tfTelefone.setText(cliente.getTelefone());
             tfEmail.setText(cliente.getEmail());
-            
-            tfLogradouro.setText(cliente.getEndereco().getLogradouro());
+            tfLogradouro.setText(cliente.endereco.getLogradouro());
+            tfComplemento.setText(cliente.endereco.getComplemento());
+            tfCidade.setText(cliente.endereco.getCidade());
+            tfCep.setText(cliente.endereco.getCep());
+
         }
-        
-        
-        //setar o cep no combobox
-        
-        for(int i = 0; i < cbEstado.getItemCount(); i++)
-        {
-            if (cbEstado.getItemAt(i).equals(cliente.getEstado()))
+        //setar o cep no combobox        
+        for (int i = 0; i < cbEstado.getItemCount(); i++) {
+            if (cbEstado.getItemAt(i).equals(cliente.endereco.getEstado())) {
+                
+            }
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
@@ -500,7 +505,7 @@ public class FormCliente extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField tfCep;
     private javax.swing.JTextField tfCidade;
     private javax.swing.JTextField tfComplemento;
     private javax.swing.JTextField tfCpf;

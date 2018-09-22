@@ -121,6 +121,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         JMenuConsultas.setToolTipText("");
 
         jMenuItemConsuClientes.setText("Clientes");
+        jMenuItemConsuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemConsuClientesActionPerformed(evt);
+            }
+        });
         JMenuConsultas.add(jMenuItemConsuClientes);
 
         jMenuItemConsuProdutos.setText("Produtos");
@@ -180,6 +185,12 @@ public class FormPrincipal extends javax.swing.JFrame {
         
        // this.dispose(); estava fechando o form principal
     }//GEN-LAST:event_jMenuItemCadClienteActionPerformed
+
+    private void jMenuItemConsuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemConsuClientesActionPerformed
+        // TODO add your handling code here:
+        
+        new FormConsultaCliente().setVisible(true);
+    }//GEN-LAST:event_jMenuItemConsuClientesActionPerformed
 
     /**
      * @param args the command line arguments

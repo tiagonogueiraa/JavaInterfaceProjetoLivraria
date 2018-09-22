@@ -32,7 +32,7 @@ public class FormConsultaCliente extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         tfCpf = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btBuscarCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         taExibir = new javax.swing.JTextArea();
         btExcluir = new javax.swing.JButton();
@@ -42,10 +42,10 @@ public class FormConsultaCliente extends javax.swing.JFrame {
 
         jLabel1.setText("Cpf");
 
-        jButton1.setText("Buscar Cliente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btBuscarCliente.setText("Buscar Cliente");
+        btBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btBuscarClienteActionPerformed(evt);
             }
         });
 
@@ -78,13 +78,12 @@ public class FormConsultaCliente extends javax.swing.JFrame {
                         .addComponent(btExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btSair, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1)
-                        .addComponent(jLabel1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(94, 94, 94)
-                            .addComponent(jButton1))))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(btBuscarCliente)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -95,7 +94,7 @@ public class FormConsultaCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btBuscarCliente))
                 .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
@@ -108,7 +107,7 @@ public class FormConsultaCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarClienteActionPerformed
         // TODO add your handling code here:
         
         String cpf = tfCpf.getText();
@@ -119,12 +118,13 @@ public class FormConsultaCliente extends javax.swing.JFrame {
          
             taExibir.setText(cli.toString());
             btExcluir.setEnabled(true);
+          
         }
         
         else 
             
             JOptionPane.showMessageDialog(null, "Cliente inexistente");
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btBuscarClienteActionPerformed
 
     private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
         // TODO add your handling code here:
@@ -133,6 +133,12 @@ public class FormConsultaCliente extends javax.swing.JFrame {
 
     private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
         // TODO add your handling code here:
+        FormPrincipal.daoCliente.removerCliente(tfCpf.getText());
+        
+        btExcluir.setEnabled(false);
+        tfCpf.setText("");
+        taExibir.setText("");
+        tfCpf.requestFocus();
     }//GEN-LAST:event_btExcluirActionPerformed
 
     /**
@@ -171,9 +177,9 @@ public class FormConsultaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBuscarCliente;
     private javax.swing.JButton btExcluir;
     private javax.swing.JButton btSair;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea taExibir;

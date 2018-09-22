@@ -50,7 +50,7 @@ public class ClienteDAO {
 
         Cliente cli = null;
         for (Cliente cliente : lista) {
-            if (cliente.getCpf() == cpf) {
+            if (cliente.getCpf().equals(cpf)) {
                 cli = cliente;
 
             }
