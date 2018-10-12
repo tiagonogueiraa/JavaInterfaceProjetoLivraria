@@ -85,9 +85,12 @@ public class FormLivro extends javax.swing.JFrame {
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton3);
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
         jButton4.setText("Sair");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton4.setMaximumSize(new java.awt.Dimension(90, 70));
+        jButton4.setMinimumSize(new java.awt.Dimension(90, 70));
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(jButton4);
 
@@ -169,10 +172,11 @@ public class FormLivro extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 65, Short.MAX_VALUE))
         );
 
@@ -203,9 +207,9 @@ public class FormLivro extends javax.swing.JFrame {
             livro.setCodigo(1000+i);
             livro.setTitulo("Livro em Titulo " + i);
             livro.setFornecedor("Editora " + i+10);
-            livro.setEstoque((int)(Math.random() * 10) + 10*1 );
-            livro.setCalor((%i) + (i*10));
-            livro.setData(i+"/05/"+(1990+i));
+            livro.setQtdEstoque((int)(Math.random() * 10) + 10*1 );
+            livro.setValorUnitario((50%i) + (i*10));
+            livro.setData(i+"/05/"+(1990+i)); // acho que tem que verificar a data
             FormPrincipal.daoLivro.inserirLivro(livro); //adicionado um livro generico na base
         }
     }

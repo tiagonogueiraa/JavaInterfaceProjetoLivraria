@@ -5,23 +5,25 @@
  */
 package classes;
 
+import java.util.Date;
+
 /**
  *
  * @author alunoces
  */
 public class Livro {
 
-    private String codigo;
+    private int codigo;
     private String titulo;
     private String fornecedor;
-    private String qtdEstoque;
+    private int qtdEstoque;
     private float valorUnitario;
     private String dataPublicacao;
 
     public Livro() {
     }
 
-    public Livro(String codigo, String titulo, String fornecedor, String qtdEstoque, float valorUnitario, String dataPublicacao) {
+    public Livro(int codigo, String titulo, String fornecedor, int qtdEstoque, float valorUnitario, String dataPublicacao) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.fornecedor = fornecedor;
@@ -42,14 +44,14 @@ public class Livro {
 
     }
 
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
+    
     public String getTitulo() {
         return titulo;
     }
@@ -66,11 +68,11 @@ public class Livro {
         this.fornecedor = fornecedor;
     }
 
-    public String getQtdEstoque() {
+    public int getQtdEstoque() {
         return qtdEstoque;
     }
 
-    public void setQtdEstoque(String qtdEstoque) {
+    public void setQtdEstoque(int qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
     }
 
@@ -89,5 +91,7 @@ public class Livro {
     public void setDataPublicacao(String dataPublicacao) {
         this.dataPublicacao = dataPublicacao;
     }
+
+        
 
 }
