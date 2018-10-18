@@ -17,6 +17,8 @@ public class FormLivro extends javax.swing.JFrame {
     /**
      * Creates new form FormLivro
      */
+    public Livro livro = null; // se está null. não vou editar no objeto, diferente null eu quero editar
+
     public FormLivro() {
         initComponents();
     }
@@ -32,23 +34,28 @@ public class FormLivro extends javax.swing.JFrame {
 
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btAtualizar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tfCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        tfTitulo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbFornecedor = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        tfValorUnitario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        tfQtdEstoque = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        tfDataPublicacao = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
@@ -67,14 +74,20 @@ public class FormLivro extends javax.swing.JFrame {
         });
         jToolBar1.add(jButton1);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icAtualizar2.png"))); // NOI18N
-        jButton2.setText("Atualizar");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setMaximumSize(new java.awt.Dimension(90, 70));
-        jButton2.setMinimumSize(new java.awt.Dimension(90, 70));
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        btAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icAtualizar2.png"))); // NOI18N
+        btAtualizar.setText("Atualizar");
+        btAtualizar.setEnabled(false);
+        btAtualizar.setFocusable(false);
+        btAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAtualizar.setMaximumSize(new java.awt.Dimension(90, 70));
+        btAtualizar.setMinimumSize(new java.awt.Dimension(90, 70));
+        btAtualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(btAtualizar);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         jButton3.setText("Cancelar");
@@ -100,22 +113,22 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel3.setText("Fornecedor:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
         jLabel4.setText("Valor unitário:");
 
         jLabel5.setText("Quantidade em estoque:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        tfQtdEstoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                tfQtdEstoqueActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Data publicação:");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            tfDataPublicacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -129,25 +142,25 @@ public class FormLivro extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(94, 94, 94)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2)
+                            .addComponent(tfTitulo)
                             .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tfQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(69, 69, 69)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(tfDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -160,12 +173,12 @@ public class FormLivro extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -173,10 +186,10 @@ public class FormLivro extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfQtdEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tfDataPublicacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 65, Short.MAX_VALUE))
         );
 
@@ -185,36 +198,99 @@ public class FormLivro extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
+
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja cadastar livros?", "Cadastro de livros", JOptionPane.INFORMATION_MESSAGE);
-        if(opcao == JOptionPane.YES_OPTION)
-        {
+        if (opcao == JOptionPane.YES_OPTION) {
             cadastrarLivros();
             JOptionPane.showConfirmDialog(rootPane, opcao)
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void tfQtdEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQtdEstoqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_tfQtdEstoqueActionPerformed
 
-    public void cadastrarLivros()
-    {
-        Livro livro = null; // criando um livro
-        for(int i=1; i>30; i++)
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if (livro != null) {
+            btAtualizar.setEnabled(true);
+            tfCodigo.setEnabled(false);//desabilitar para edição do codigo 
+
+            tfCodigo.setText(Integer.toString(livro.getCodigo()));
+            tfTitulo.setText(livro.getTitulo());
+            tfDataPublicacao.setText(livro.getDataPublicacao());
+            tfQtdEstoque.setText(Integer.toString(livro.getQtdEstoque()));
+            tfValorUnitario.setText(Float.toString(livro.getValorUnitario()));
+
+            for (int i = 0; i < cbFornecedor.getItemCount(); i++) {
+                if (cbFornecedor.getItemAt(i).equals(livro.getFornecedor())) {
+                    cbFornecedor.setSelectedIndex(i);
+                }
+            }
+
+        }
+
+        else 
         {
+            btAtualizar.setEnabled(false);
+            tfCodigo.setEnabled(true);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        // TODO add your handling code here:
+        
+        //criar um objeto livro
+        //pegar cada informacao dos campos e colocar no objeto
+        //guardar o objeto no Dao, o método é atuazliara DAO >> atualizar()
+   
+        //pegar os dados da tela e inserindo no objeto
+
+        
+        Livro livro = new Livro();
+        
+        livro.setCodigo(Integer.parseInt((tfCodigo.getText())));
+        livro.setTitulo(tfTitulo.getText());
+        livro.setFornecedor(cbFornecedor.getSelectedItem().toString());
+        livro.setDataPublicacao(tfDataPublicacao.getText());
+        livro.setValorUnitario(Float.parseFloat(tfValorUnitario));
+        livro.setQtdEstoque(Integer.parseInt((tfQtdEstoque.getText())));
+        Cliente cliente = new Cliente();
+        //criar o objeto e preenche-lo
+        cliente.setCpf(tfCpf.getText());
+        cliente.setNome(tfNome.getText());
+        cliente.setEstadoCivil(bgEstadoCivil.getSelection().getActionCommand());
+        cliente.setTelefone(tfTelefone.getText());
+        cliente.setEmail(tfEmail.getText());
+        //String logradouro, String complemento, String cidade, String estado, String cep
+        cliente.endereco.setLogradouro(tfLogradouro.getText());
+        //auto.setMotor(cbMotor.getSelectedItem().toString());
+        cliente.endereco.setEstado(cbEstado.getSelectedItem().toString());
+        cliente.endereco.setComplemento(tfComplemento.getText());
+        cliente.endereco.setCidade(tfCidade.getText());
+        cliente.endereco.setCep(tfCep.getText());
+        
+
+        //salvar na base de dados
+        FormPrincipal.daoCliente.adicionarCliente(cliente);
+        JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso", "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
+        limpar();
+    }//GEN-LAST:event_btAtualizarActionPerformed
+
+    public void cadastrarLivros() {
+        Livro livro = null; // criando um livro
+        for (int i = 1; i > 30; i++) {
             livro = new Livro();
-            livro.setCodigo(1000+i);
+            livro.setCodigo(1000 + i);
             livro.setTitulo("Livro em Titulo " + i);
-            livro.setFornecedor("Editora " + i+10);
-            livro.setQtdEstoque((int)(Math.random() * 10) + 10*1 );
-            livro.setValorUnitario((50%i) + (i*10));
-            livro.setData(i+"/05/"+(1990+i)); // acho que tem que verificar a data
+            livro.setFornecedor("Editora " + i + 10);
+            livro.setQtdEstoque((int) (Math.random() * 10) + 10 * 1);
+            livro.setValorUnitario((50 % i) + (i * 10));
+            livro.setData(i + "/05/" + (1990 + i)); // acho que tem que verificar a data
             FormPrincipal.daoLivro.inserirLivro(livro); //adicionado um livro generico na base
         }
     }
-    
-    
+
     /**
      * @param args the command line arguments
      */
@@ -251,22 +327,22 @@ public class FormLivro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAtualizar;
+    private javax.swing.JComboBox<String> cbFornecedor;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JTextField tfCodigo;
+    private javax.swing.JFormattedTextField tfDataPublicacao;
+    private javax.swing.JTextField tfQtdEstoque;
+    private javax.swing.JTextField tfTitulo;
+    private javax.swing.JTextField tfValorUnitario;
     // End of variables declaration//GEN-END:variables
 }
