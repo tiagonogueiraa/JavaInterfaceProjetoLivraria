@@ -269,6 +269,11 @@ public class FormCliente extends javax.swing.JFrame {
         });
 
         btAtualizar.setText("Atualizar");
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
+            }
+        });
 
         btLimpar.setText("Limpar");
         btLimpar.addActionListener(new java.awt.event.ActionListener() {
@@ -426,6 +431,10 @@ public class FormCliente extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btAtualizarActionPerformed
 
     private void limpar() {
         tfNome.setText("");
