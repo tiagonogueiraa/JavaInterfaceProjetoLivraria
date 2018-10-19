@@ -5,10 +5,33 @@
  */
 package dao;
 
+
+import classes.Livro;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author alunoces
  */
 public class LivroDAO {
+    
+    //COMO NÃO TEM BANCO, VAI CRIAR UM ATRIBUTO LISTA
+    private List<Livro> lista = null;
+    
+    public LivroDAO() {
+        
+        lista = new ArrayList<Livro>();
+    }
+    
+    public void adicionarCliente(Livro livro) {
+        lista.add(livro);
+    }
+    
+    public void removerCliente (int codigo) {
+        
+        Livro li = this.buscarLivro
+        
+    }
     
 }
