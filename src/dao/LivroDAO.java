@@ -24,11 +24,11 @@ public class LivroDAO {
         lista = new ArrayList<Livro>();
     }
     
-    public void adicionarCliente(Livro livro) {
+    public void adicionarLivro(Livro livro) {
         lista.add(livro);
     }
     
-    public void removerCliente (int codigo) {
+    public void removerLivro (int codigo) {
         
         Livro li = this.buscarLivro
         

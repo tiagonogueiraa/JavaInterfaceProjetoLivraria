@@ -6,6 +6,8 @@
 package forms;
 
 import dao.ClienteDAO;
+import dao.LivroDAO;
+import dao.VendaDAO;
 
 /**
  *
@@ -17,6 +19,8 @@ public class FormPrincipal extends javax.swing.JFrame {
      * Creates new form FormPrincipal
      */
     public static ClienteDAO daoCliente = null;
+    public static LivroDAO daoLivro = null;
+    public static VendaDAO daoVenda = null;
     
     
     public FormPrincipal() {
@@ -25,6 +29,8 @@ public class FormPrincipal extends javax.swing.JFrame {
         this.setExtendedState(this.MAXIMIZED_BOTH);
         
         daoCliente = new ClienteDAO();
+        daoLivro = new LivroDAO();
+        daoVenda = new VendaDAO();
     }
 
     /**
