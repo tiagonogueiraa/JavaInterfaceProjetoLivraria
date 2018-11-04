@@ -6,6 +6,9 @@
 package forms;
 
 import classes.Livro;
+import com.sun.istack.internal.logging.Logger;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,10 +36,10 @@ public class FormLivro extends javax.swing.JFrame {
     private void initComponents() {
 
         jToolBar1 = new javax.swing.JToolBar();
-        jButton1 = new javax.swing.JButton();
+        btCadastrar = new javax.swing.JButton();
         btAtualizar = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btCancelar = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         tfCodigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -60,19 +63,19 @@ public class FormLivro extends javax.swing.JFrame {
         jToolBar1.setFloatable(false);
         jToolBar1.setRollover(true);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/habilitado.png"))); // NOI18N
-        jButton1.setText("Cadastrar");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setMaximumSize(new java.awt.Dimension(90, 70));
-        jButton1.setMinimumSize(new java.awt.Dimension(90, 70));
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icCadlivro.png"))); // NOI18N
+        btCadastrar.setText("Cadastrar");
+        btCadastrar.setFocusable(false);
+        btCadastrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btCadastrar.setMaximumSize(new java.awt.Dimension(90, 70));
+        btCadastrar.setMinimumSize(new java.awt.Dimension(90, 70));
+        btCadastrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btCadastrarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btCadastrar);
 
         btAtualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icAtualizar2.png"))); // NOI18N
         btAtualizar.setText("Atualizar");
@@ -89,23 +92,23 @@ public class FormLivro extends javax.swing.JFrame {
         });
         jToolBar1.add(btAtualizar);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
-        jButton3.setText("Cancelar");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setMaximumSize(new java.awt.Dimension(90, 70));
-        jButton3.setMinimumSize(new java.awt.Dimension(90, 70));
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
+        btCancelar.setText("Cancelar");
+        btCancelar.setFocusable(false);
+        btCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btCancelar.setMaximumSize(new java.awt.Dimension(90, 70));
+        btCancelar.setMinimumSize(new java.awt.Dimension(90, 70));
+        btCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btCancelar);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
-        jButton4.setText("Sair");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setMaximumSize(new java.awt.Dimension(90, 70));
-        jButton4.setMinimumSize(new java.awt.Dimension(90, 70));
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
+        btSair.setText("Sair");
+        btSair.setFocusable(false);
+        btSair.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btSair.setMaximumSize(new java.awt.Dimension(90, 70));
+        btSair.setMinimumSize(new java.awt.Dimension(90, 70));
+        btSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btSair);
 
         jLabel1.setText("Código:");
 
@@ -114,6 +117,11 @@ public class FormLivro extends javax.swing.JFrame {
         jLabel3.setText("Fornecedor:");
 
         cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFornecedorActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Valor unitário:");
 
@@ -196,15 +204,38 @@ public class FormLivro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
         // TODO add your handling code here:
 
-        int opcao = JOptionPane.showConfirmDialog(null, "Deseja cadastar livros?", "Cadastro de livros", JOptionPane.INFORMATION_MESSAGE);
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja cadastar livros?", "Cadastro de livros", JOptionPane.YES_NO_OPTION);
+        
         if (opcao == JOptionPane.YES_OPTION) {
             cadastrarLivros();
-            JOptionPane.showConfirmDialog(rootPane, opcao)
+            JOptionPane.showConfirmDialog(null, "Livros cadastrados com sucesso!", "Alerta de livros", JOptionPane.INFORMATION_MESSAGE);
+            
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        else {
+            
+        }
+        
+        Livro livro = new Livro();
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        livro.setCodigo(Integer.parseInt(tfCodigo.getText()));
+        livro.setTitulo(tfTitulo.getText());
+        livro.setFornecedor(cbFornecedor.getSelectedItem().toString());
+        livro.setValorUnitario(Float.parseFloat((tfValorUnitario.getText())));
+        livro.setQtdEstoque(Integer.parseInt(tfQtdEstoque.getText()));
+        
+        
+        try {
+            livro.setDataPublicacao(sdf.parse(tfDataPublicacao.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex));
+        }
+        
+    }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void tfQtdEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfQtdEstoqueActionPerformed
         // TODO add your handling code here:
@@ -277,6 +308,10 @@ public class FormLivro extends javax.swing.JFrame {
         limpar();
     }//GEN-LAST:event_btAtualizarActionPerformed
 
+    private void cbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFornecedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbFornecedorActionPerformed
+
     public void cadastrarLivros() {
         Livro livro = null; // criando um livro
         for (int i = 1; i > 30; i++) {
@@ -286,8 +321,8 @@ public class FormLivro extends javax.swing.JFrame {
             livro.setFornecedor("Editora " + i + 10);
             livro.setQtdEstoque((int) (Math.random() * 10) + 10 * 1);
             livro.setValorUnitario((50 % i) + (i * 10));
-            livro.setData(i + "/05/" + (1990 + i)); // acho que tem que verificar a data
-            FormPrincipal.daoLivro.inserirLivro(livro); //adicionado um livro generico na base
+            livro.setDataPublicacao(i + "/05/" + (1990 + i)); // acho que tem que verificar a data
+            FormPrincipal.daoLivro.adicionarLivro(livro); //adicionado um livro generico na base
         }
     }
 
@@ -328,10 +363,10 @@ public class FormLivro extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAtualizar;
+    private javax.swing.JButton btCadastrar;
+    private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btSair;
     private javax.swing.JComboBox<String> cbFornecedor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
