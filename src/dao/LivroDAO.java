@@ -28,10 +28,42 @@ public class LivroDAO {
         lista.add(livro);
     }
     
+    public Livro buscarLivro(int codigo)
+    {
+        Livro liv = null;
+        for(Livro livro: lista)
+        {
+            if(livro.getCodigo() == codigo)
+                liv = livro;
+        }
+        
+        return liv;
+    }
+    
     public void removerLivro (int codigo) {
         
-        Livro li = this.buscarLivro
+        Livro livro = this.buscarLivro(codigo);
+        if(livro != null)
+        {
+            lista.remove(livro);
+        }
         
     }
+    
+    public void alterarLivro(Livro livro)
+    {
+        if(livro != null)
+        {
+            int pos = lista.indexOf(livro);
+            lista.set(pos, livro);
+        }
+    }
+    
+    public List<Livro> todosLivros()
+    {
+        return lista;
+    }
+    
+    
     
 }

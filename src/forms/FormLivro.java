@@ -99,6 +99,11 @@ public class FormLivro extends javax.swing.JFrame {
         btCancelar.setMaximumSize(new java.awt.Dimension(90, 70));
         btCancelar.setMinimumSize(new java.awt.Dimension(90, 70));
         btCancelar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btCancelar);
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
@@ -108,6 +113,11 @@ public class FormLivro extends javax.swing.JFrame {
         btSair.setMaximumSize(new java.awt.Dimension(90, 70));
         btSair.setMinimumSize(new java.awt.Dimension(90, 70));
         btSair.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btSair);
 
         jLabel1.setText("Código:");
@@ -116,7 +126,7 @@ public class FormLivro extends javax.swing.JFrame {
 
         jLabel3.setText("Fornecedor:");
 
-        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        cbFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Editora x" }));
         cbFornecedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFornecedorActionPerformed(evt);
@@ -216,8 +226,6 @@ public class FormLivro extends javax.swing.JFrame {
         }
         else {
             
-        }
-        
         Livro livro = new Livro();
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -227,13 +235,14 @@ public class FormLivro extends javax.swing.JFrame {
         livro.setFornecedor(cbFornecedor.getSelectedItem().toString());
         livro.setValorUnitario(Float.parseFloat((tfValorUnitario.getText())));
         livro.setQtdEstoque(Integer.parseInt(tfQtdEstoque.getText()));
+        livro.setDataPublicacao(tfDataPublicacao.getText());
         
-        
-        try {
-            livro.setDataPublicacao(sdf.parse(tfDataPublicacao.getText()));
-        } catch (ParseException ex) {
-            Logger.getLogger(FormLivro.class.getName()).log(Level.SEVERE, null, ex));
+        //salvar na base de dados
+        FormPrincipal.daoLivro.adicionarLivro(livro);
+        JOptionPane.showMessageDialog(null, "Livro cadastrado com sucesso", "Cadastro de livro", JOptionPane.INFORMATION_MESSAGE);
+        limpar();
         }
+        
         
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -272,45 +281,36 @@ public class FormLivro extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         //criar um objeto livro
+        Livro livro = null;
         //pegar cada informacao dos campos e colocar no objeto
-        //guardar o objeto no Dao, o método é atuazliara DAO >> atualizar()
-   
-        //pegar os dados da tela e inserindo no objeto
-
-        
-        Livro livro = new Livro();
-        
-        livro.setCodigo(Integer.parseInt((tfCodigo.getText())));
+        livro.setCodigo(Integer.parseInt(tfCodigo.getText()));
         livro.setTitulo(tfTitulo.getText());
-        livro.setFornecedor(cbFornecedor.getSelectedItem().toString());
         livro.setDataPublicacao(tfDataPublicacao.getText());
-        livro.setValorUnitario(Float.parseFloat(tfValorUnitario));
-        livro.setQtdEstoque(Integer.parseInt((tfQtdEstoque.getText())));
-        Cliente cliente = new Cliente();
-        //criar o objeto e preenche-lo
-        cliente.setCpf(tfCpf.getText());
-        cliente.setNome(tfNome.getText());
-        cliente.setEstadoCivil(bgEstadoCivil.getSelection().getActionCommand());
-        cliente.setTelefone(tfTelefone.getText());
-        cliente.setEmail(tfEmail.getText());
-        //String logradouro, String complemento, String cidade, String estado, String cep
-        cliente.endereco.setLogradouro(tfLogradouro.getText());
-        //auto.setMotor(cbMotor.getSelectedItem().toString());
-        cliente.endereco.setEstado(cbEstado.getSelectedItem().toString());
-        cliente.endereco.setComplemento(tfComplemento.getText());
-        cliente.endereco.setCidade(tfCidade.getText());
-        cliente.endereco.setCep(tfCep.getText());
-        
+        livro.setValorUnitario(Float.parseFloat(tfDataPublicacao.getText()));
+        livro.setQtdEstoque(Integer.parseInt(tfValorUnitario.getText()));
+        //guardar o objeto no Dao, o método é atuazliara DAO >> atualizar()
+        //pegar os dados da tela e inserindo no objeto
+        FormPrincipal.daoLivro.alterarLivro(livro);
+        JOptionPane.showMessageDialog(null, "Livro Alterado", "Controle de Livro", JOptionPane.INFORMATION_MESSAGE);
 
-        //salvar na base de dados
-        FormPrincipal.daoCliente.adicionarCliente(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente cadastrado com susesso", "Cadastro de Cliente", JOptionPane.INFORMATION_MESSAGE);
-        limpar();
+        
     }//GEN-LAST:event_btAtualizarActionPerformed
 
     private void cbFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFornecedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbFornecedorActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        // TODO add your handling code here:
+        int sair = JOptionPane.showConfirmDialog(null, "Deseja sair?" , "Sair da tela", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (sair == 0)            
+            this.dispose();
+    }//GEN-LAST:event_btSairActionPerformed
+
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        // TODO add your handling code here:
+        limpar();
+    }//GEN-LAST:event_btCancelarActionPerformed
 
     public void cadastrarLivros() {
         Livro livro = null; // criando um livro
@@ -324,6 +324,18 @@ public class FormLivro extends javax.swing.JFrame {
             livro.setDataPublicacao(i + "/05/" + (1990 + i)); // acho que tem que verificar a data
             FormPrincipal.daoLivro.adicionarLivro(livro); //adicionado um livro generico na base
         }
+    }
+    
+    public void limpar() {
+        
+        tfCodigo.setText("");
+        tfDataPublicacao.setText("");
+        tfQtdEstoque.setText("");
+        tfTitulo.setText("");
+        tfValorUnitario.setText("");
+        cbFornecedor.setSelectedIndex(-1);
+        tfCodigo.requestFocus();
+        btAtualizar.setEnabled(false);
     }
 
     /**
