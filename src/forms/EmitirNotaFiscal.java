@@ -5,6 +5,12 @@
  */
 package forms;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author alunoces
@@ -61,6 +67,11 @@ public class EmitirNotaFiscal extends javax.swing.JFrame {
 
         btEmitirNf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icNotaFiscal.png"))); // NOI18N
         btEmitirNf.setText("Emitir NF");
+        btEmitirNf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btEmitirNfActionPerformed(evt);
+            }
+        });
 
         btCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/cancelar.png"))); // NOI18N
         btCancelar.setText("Cancelar");
@@ -119,6 +130,35 @@ public class EmitirNotaFiscal extends javax.swing.JFrame {
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btEmitirNfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEmitirNfActionPerformed
+        // TODO add your handling code here:
+        File arq = new File("C:\\Users\\alunoces\\Documents\\NetBeansProjects\\ProjetoLivraria\\src\\notasFiscais\\NotaFiscal_"+tfNumVenda.getText()+".txt");
+        
+        if(!arq.exists())
+        {
+            try {
+                arq.createNewFile();
+                
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Não foi possível criar o arquivo!", "Atenção", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        
+        try {
+            FileWriter fw = new FileWriter(arq);
+            BufferedWriter bw = new BufferedWriter(fw);
+            
+            bw.write(taDadosNf.getText());
+            bw.close();
+            fw.close();
+            
+            JOptionPane.showMessageDialog(null, "Nota fiscal foi criada com sucesso!", "Atenção", JOptionPane.INFORMATION_MESSAGE);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Nota fiscal foi abrir o arquivo!", "Atenção", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btEmitirNfActionPerformed
 
     /**
      * @param args the command line arguments

@@ -11,4 +11,10 @@ package dao;
  */
 public class VendaDAO {
     
+    
+    public int proximo()
+    {
+        
+    }
+    
 }
