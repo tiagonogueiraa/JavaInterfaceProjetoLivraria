@@ -6,20 +6,30 @@
 package forms;
 
 import classes.Livro;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author alunoces
  */
 public class FormConsultaLivroTabela extends javax.swing.JFrame {
-    
+
     DefaultTableModel modelo;
+
     /**
      * Creates new form FormConsultaLivro
      */
     public FormConsultaLivroTabela() {
         initComponents();
-        this.modelo = ()
+
+        //tira o foco
+        btBuscar.setFocusable(false);
+
+        //cria a tabela
+        this.modelo = (DefaultTableModel) jTable1.getModel();
     }
 
     /**
@@ -108,14 +118,34 @@ public class FormConsultaLivroTabela extends javax.swing.JFrame {
 
         btBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icBuscar.png"))); // NOI18N
         btBuscar.setText("Buscar");
+        btBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscarActionPerformed(evt);
+            }
+        });
 
         ckBuscarTodos.setText("Buscar todos");
+        ckBuscarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ckBuscarTodosActionPerformed(evt);
+            }
+        });
 
         btExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icExcluir.png"))); // NOI18N
         btExcluir.setText("Excluir");
+        btExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btExcluirActionPerformed(evt);
+            }
+        });
 
         btSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/icSair.png"))); // NOI18N
         btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -171,31 +201,122 @@ public class FormConsultaLivroTabela extends javax.swing.JFrame {
 
     private void btEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEditarActionPerformed
         // TODO add your handling code here:
-        
+
         //pegar o livro da celular selecionada
         // mesma que fez no excluir.
-        
         Livro livro = getLivro();
-        
+
         FormLivro frm = new FormLivro();
         frm.setVisible(true);
         frm.livro = livro;
-        
+
         //ou fecha a janela ou esconde a janela, pois se esconde não tem que fazer a pesquisa novamente e se fechar terá que fazer a pesquisa novemente
         //no caso desaparecemos a janela
         this.dispose();
-        
+
     }//GEN-LAST:event_btEditarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
+        
+        btEditar.setEnabled(true);
+        btExcluir.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void tfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfCodigoActionPerformed
 
+    private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
+        // TODO add your handling code here:
+
+        limparTabela(); // limpa area do texto
+
+        if (ckBuscarTodos.isSelected()) {
+            List<Livro> lista = FormPrincipal.daoLivro.todosLivros();
+
+            for (Livro l : lista) {
+                incluirLivroTabela(l);
+            }
+        } else {
+            if (tfCodigo.getText().trim().length() != 0) {
+                int codigo = Integer.parseInt(tfCodigo.getText());
+                Livro livro = FormPrincipal.daoLivro.buscarLivro(codigo);
+                if (livro != null) {
+                    incluirLivroTabela(livro);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Livro não encontrado.", "Atenção!", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Favor preencher o Código do Livro! ", "Atenção!", JOptionPane.ERROR_MESSAGE);
+                tfCodigo.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        // TODO add your handling code here:
+
+        int sairSistema = JOptionPane.showConfirmDialog(null, "Sair da Consulta? ", "Sair da Janela", JOptionPane.YES_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if (sairSistema == 0) {
+            this.dispose();
+        }
+    }//GEN-LAST:event_btSairActionPerformed
+
+    private void btExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btExcluirActionPerformed
+        // TODO add your handling code here:
+        
+        Livro livro = getLivro();
+        FormPrincipal.daoLivro.removerLivro(livro.getCodigo());
+        
+        modelo.removeRow(jTable1.getSelectedRow());
+        
+    }//GEN-LAST:event_btExcluirActionPerformed
+
+    private void ckBuscarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckBuscarTodosActionPerformed
+        // TODO add your handling code here:
+        
+        tfCodigo.setText("");
+        
+        if(ckBuscarTodos.isSelected())
+        {
+            tfCodigo.setEnabled(false);
+        }
+        else
+        {
+            tfCodigo.setEnabled(true);
+            tfCodigo.requestFocus();
+            tfCodigo.setText("");
+        }
+    }//GEN-LAST:event_ckBuscarTodosActionPerformed
+
+    private void incluirLivroTabela(Livro livro) {
+        modelo.addRow(new Object[]{livro.getCodigo(), livro.getTitulo(), livro.getFornecedor(), livro.getQtdEstoque(), livro.getDataPublicacao()});
+    }
+
+    public void limparTabela() {
+        for (int i = jTable1.getRowCount() - 1; i >= 0; --i) {
+            modelo.removeRow(i);
+        }
+    }
+
+    private Livro getLivro() {
+
+        Livro livro = new Livro();
+        int linha = jTable1.getSelectedRow();
+
+        livro.setCodigo((Integer) modelo.getValueAt(linha, 0));
+        livro.setTitulo((String) modelo.getValueAt(linha, 1));
+        livro.setFornecedor((String) modelo.getValueAt(linha, 2));
+        livro.setQtdEstoque((Integer) modelo.getValueAt(linha, 3));
+        livro.setValorUnitario((Float) modelo.getValueAt(linha, 4));
+        livro.setDataPublicacao((String) modelo.getValueAt(linha, 5));
+
+        return livro;
+    }
+
     /**
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -227,7 +348,7 @@ public class FormConsultaLivroTabela extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new FormConsultaLivroTabela().setVisible(true);
-            }   
+            }
         });
     }
 
